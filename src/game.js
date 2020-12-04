@@ -2,60 +2,70 @@
  *
  * Author: Emma Bethel, 12/4/20
  *
- * Bro imagine documenting your code. couldn't be me
+ * ugly, but it works... kind of
+ * (TODO: write an actual header)
  */
 
-shooting = false;
+ //TODO: write function for resetting position zero (offset var in robot obj, set it to current position whenever a certain button is pressed)
 
+var robot;
+var setupSuccessful = false;
+
+// setting up motors/sensors
+robotInit();
+
+// shoots one ball
  function shootOnce() {
+    console.log("pressed shoot");
 
-    let leftArm = mySPIKE.Motor('F');
-    let  rightArm = mySPIKE.Motor('E');
-    let rotator = mySPIKE.Motor('C');
-    let arms = mySPIKE.MotorPair('F', 'E');
+    console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
 
-    let initPos = rightArm.get_degrees_counted();
+    robot.arms.start_tank(cloud_get("left_speed"), cloud_get("right_speed"));
+    //TODO: make it angle instead of time based
+        // weird bug: .get_position() gives really large numbers (in the thousands) and .get_degrees_counted() gets smaller ones that seem to cycle over? seems like it should be the other way around
 
-    //while(Math.abs(rightArm.get_degrees_counted()) - initPos < 720) {
-        console.log(rightArm.get_degrees_counted());
-        if(!shooting) {
-            arms.start_tank(cloud_get('left_speed'), cloud_get('right_speed'));
-            shooting = true;
-        }
-
-        setTimeout(function() {
-            arms.stop();
-        }, (2000));
-    //}
-    //arms.stop();
+    setTimeout(function() {
+        robot.arms.stop();
+        console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
+    }, (2000));
 
     cloud_update('command', 'none');
  }
 
- function goToStartPos() {
-    let leftArm = mySPIKE.Motor('F');
-    let rightArm = mySPIKE.Motor('E');
-    let rotator = mySPIKE.Motor('C');
-    let arms = mySPIKE.MotorPair('F', 'E');
+ /* initializes robot object with necessary motors and sensors
+  * if spike is not connected, will repeat attempt every 2 seconds until 
+  * successful inititalization
+  */
+ function robotInit() {
+    if(mySPIKE && mySPIKE.isActive()) {
+        robot = {
+            leftArm: mySPIKE.Motor('F'),
+            rightArm: mySPIKE.Motor('E'),
+            rotator: mySPIKE.Motor('C'),
+            arms: mySPIKE.MotorPair('F', 'E')
 
-    /*leftArm.start(30);
-
-    for(let a = 0; a < 100; a++)
-    {
-        if(a % 10 == 0)
-            console.log("counted: " + leftArm.get_degrees_counted());
-            console.log("pos: " + leftArm.get_position());
-    }*/
-
-    //leftArm.stop();
-
-    cloud_update("restart", false);
-
-    //leftArm.run_to_position(0, 30, doneRunningMotor());
-    //rightArm.run_to_position(0, 30, doneRunningMotor());
-    //rotator.run_to_position(0, 30, doneRunningMotor());
+        };
+        setupSuccessful = true;
+        console.log("initialized robot!");
+    } else {
+        console.log("could not initialize robot. trying again in 2 s");
+        setTimeout(robotInit, 2000);
+    }
  }
 
- function doneRunningMotor() {
-    console.log("motor finished moving");
+ // Moves motors to starting positions
+ function goToStartPos() {
+    console.log(robot.leftArm.get_position());
+    robot.leftArm.run_to_position(0, 30);
+    robot.rightArm.run_to_position(0, 30);
+    robot.rotator.run_to_position(0, 30);
+
+    console.log(robot.leftArm.get_position());
+
+    console.log("in start position");
+    cloud_update("reset", false);
+ }
+
+ function angleShooter(degrees) {
+    //TODO: functionality for it to move with slider
  }

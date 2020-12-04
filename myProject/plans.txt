@@ -17,3 +17,7 @@ just aesthetics)
     - use blue pillowcase as video background
 
 cloud_update(key, val)- updates val in airtables
+
+
+code notes:
+- position 0 is wherever the motor is at startup

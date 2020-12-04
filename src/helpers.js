@@ -13,18 +13,22 @@
     cloud_update('shots', 0);
     cloud_update('left_speed', 100);
     cloud_update('right_speed', 100);
+    cloud_update('command', 'none');
+    cloud_update('reset', false);
  }
 
  function resetGame() {
     resetPage();
     resetTable();
 
-    cloud_update('restart', true);
-
-    // restarting code on prime hub
-    /*if (mySPIKE && mySPIKE.isActive())
-        mySPIKE.executeProgram(1);*/
+    cloud_update('reset', true);
  }
+
+  // turns arms on and off (called whenever checkboxes are used)
+  //TODO: possibly just change local vars instead of airtables?
+function toggleArm(checked, arm) {
+   cloud_update(arm + '_speed', checked ? 100 : 0)
+}
 
  function resetPage() {
     armToggles = document.getElementsByClassName('armToggle');
@@ -33,7 +37,3 @@
 
     document.getElementById('angleSlider').value = 0;
  }
-
- function toggleArm(checked, arm) {
-   cloud_update(arm + '_speed', checked ? 100 : 0)
-}
