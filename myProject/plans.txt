@@ -1,0 +1,19 @@
+- angle control: user inputs on slider or textbox (possibly click and drag in 
+future?) hmmm, tilts image
+    - queston: is slider or text input better?
+- arm control: choose which arms to use!!!!!!!!!
+- press shoot button to shoot, it sets some variable in airtables (??? but how 
+- does it know when to reset. maybe we keep track of old number) and robot 
+shoots. if target falls, update score and display on hub
+    - since we're keeping track of score, we have to keep runnng the same 
+    program
+- start over button that reuploads code-
+- darkmode and high contrast buttons on top- changes ui (for accessiblity and 
+just aesthetics)
+- theme: space??
+    - candy boxes are alien ships
+    - why is there gravity? idk shut up nerd
+    - stars in background
+    - use blue pillowcase as video background
+
+cloud_update(key, val)- updates val in airtables

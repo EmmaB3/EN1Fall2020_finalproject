@@ -13,6 +13,26 @@ https://www.w3schools.com/css/default.asp
   float: right;
 }
 
+#controls {
+  text-align: center;
+}
+
+#instructions {
+  text-align: center;
+}
+
+#header {
+  text-align: center;
+}
+
+.footer {
+  /*background-color: darkblue;
+  color: white;
+  TODO: change link color? */
+  font-size: 11px;
+  text-align: right;
+}
+
 .buttonBlock{
     /*Give your button block some style!
     Add color, change the border, and

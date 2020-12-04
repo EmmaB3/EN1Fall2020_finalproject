@@ -1,5 +1,5 @@
 <html>
-	<title>My Project (Local)</title>
+	<title>Asteroid Blast (Local)</title>
 	<head>
 		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
 	  <script src="../src/secret.js" charset="utf-8"></script>
@@ -10,24 +10,52 @@
 
 	<!-- SERVICE DOCK -->
 	<div id="servicedock">
-		<service-airtable id="service_airtable" tablename="myProject"></service-airtable>
+		<service-airtable id="service_airtable" tablename="Page_Input"></service-airtable>
 		<service-spike id="service_spike"></service-spike>
 	</div>
 
-	<h1>My Project (Local Interface)</h1>
+	<h1>Local Interface</h1>
 
-	<!-- CREATE YOUR PROJECT HERE -->
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+	  <div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
+			<input type=text id="cloud_name" value="command">
+			<input type=text id="cloud_value" value="fire">
+      <input type=text id="cloud_action_val" value="1"> <textarea id="cloud_code">
+# MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, LightMatrix, Button, StatusLight, ForceSensor, MotionSensor, Speaker, ColorSensor, App, DistanceSensor, Motor, MotorPair
+from spike.control import wait_for_seconds, wait_until, Timer
+from spike.operator import less_than
+				
+hub = PrimeHub()
+				
+hub.light_matrix.show_image('HAPPY')
+				
+hitters = MotorPair('F', 'E')
+Motor('F').run_to_position(0)
+Motor('E').run_to_position(0)
+				
+rotator = Motor('C')
+rotator.run_to_position(CLOUD[shooter_angle])
+				
+wait_for_seconds(0.5)
+hitters.move_tank(720, 'degrees', CLOUD[left_speed], CLOUD[right_speed])
+hitters.stop()</textarea>
+			<input type=text id="cloud_reset" value="none">
+    </div>
 
 	<hr>
 
-	<h2>My Project Quick Links:</h2>
-  <p>
-    <ul>
-      <li><a href="./myProject_remote.html" target=_blank>My Project Remote Page</a></li>
-      <li><a href="./myProject_local.html" target=_blank>My Project Local Page</a></li>
-    </ul>
-  </p>
-	<p><a href="../index.html">Return back to the main homepage.</a></p>
+	<div class="footer">
+		<p>
+			<ul>
+			  <li><a href="./myProject_remote.html" target=_blank>My Project Remote Page</a></li>
+			  <li><a href="./myProject_local.html" target=_blank>My Project Local Page</a></li>
+			</ul>
+		  </p>
+			<p><a href="../index.html">Return back to the main homepage.</a></p>
+	</div>
 
 </body>
 </html>

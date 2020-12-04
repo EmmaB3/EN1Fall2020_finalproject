@@ -1,32 +1,62 @@
 <html>
-	<title>My Project (Remote)</title>
+	<title>Asteroid Blast</title>
 	<head>
 		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
 	  <script src="../src/secret.js" charset="utf-8"></script>
 	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <script src="../src/helpers.js" charset="utf-8"></script>
 	  <link rel="stylesheet" href="../src/style.css" />
 	</head>
 <body>
 
 	<!-- SERVICE DOCK -->
 	<div id="servicedock">
-		<service-airtable id="service_airtable" tablename="myProject"></service-airtable>
+		<service-airtable id="service_airtable" tablename="Page_Input"></service-airtable>
 	</div>
 
-  <h1>My Project (Remote Interface)</h1>
+	<div id="header">
+		<h1>Asteroid Blast(eroid)</h1>
+	</div>
 
-	<!-- CREATE YOUR PROJECT HERE -->
+	<div id="instructions">
+		The year is 2050. Despite long ago managing to thwart the existential threats of climate change, COVID-19, and finals week, humanity is once again facing peril, this time from three large asteroids heading rapidly towards Earth. Luckily, a group of very excited engineers has developed a robot that launches projectiles at the asteroids to throw them off their course, and they want you to control it. Use the controls below to aim and fire the launcher!
+		<p><button onclick='resetGame()'>Start</button></p>
+	</div>
 
 	<hr>
 
-	<h2>My Project Quick Links:</h2>
-  <p>
-    <ul>
-      <li><a href="./myProject_remote.html" target=_blank>My Project Remote Page</a></li>
-      <li><a href="./myProject_local.html" target=_blank>My Project Local Page</a></li>
-    </ul>
-  </p>
-	<p><a href="../index.html">Return back to the main homepage.</a></p>
+	<div id="controls">
+		<!-- Slider -->
+		<p>
+			Shooter Angle:
+		</p>
+		<p>
+			-30
+			<input type=range id='angleSlider' cloud_action='update' cloud_name='shooter_angle' cloud_min="-30" cloud_max="30" min='-30' max='30' value='0' />
+			30
+		</p>
+
+		<!-- Arm Toggles -->
+		<p>
+			<input type="checkbox" class="armToggle" onchange="toggleArm(this.checked, 'left')" checked> Using Left Arm
+			<input type="checkbox" class="armToggle" onchange="toggleArm(this.checked, 'right')" checked> Using Right Arm
+		</p>
+
+		<!-- Shoot Button -->
+		<p>
+			<button cloud_action='update' cloud_name='command' cloud_value="fire">FIRE!</button>
+		</p>
+
+	</div>
+
+
+	<hr>
+
+	<div class="footer">
+		<p><a href="./myProject_remote.html" target=_blank>My Project Remote Page</a</p>
+		<p><a href="./myProject_local.html" target=_blank>My Project Local Page</a></p>
+			<p><a href="../index.html">Return back to the main homepage.</a></p>
+	</div>
 
 </body>
 </html>
