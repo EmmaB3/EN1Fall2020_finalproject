@@ -4,6 +4,7 @@
 		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
 	  <script src="../src/secret.js" charset="utf-8"></script>
 	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <script src="../src/game.js" charset="utf-8"></script>
 	  <link rel="stylesheet" href="../src/style.css" />
 	</head>
 <body>
@@ -19,30 +20,17 @@
 	<div class="cloud_check">
 		<b><em>Monitor Cloud:</em></b>
 
-	  <div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
+	  <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
 			<input type=text id="cloud_name" value="command">
-			<input type=text id="cloud_value" value="fire">
-      <input type=text id="cloud_action_val" value="1"> <textarea id="cloud_code">
-# MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
-from spike import PrimeHub, LightMatrix, Button, StatusLight, ForceSensor, MotionSensor, Speaker, ColorSensor, App, DistanceSensor, Motor, MotorPair
-from spike.control import wait_for_seconds, wait_until, Timer
-from spike.operator import less_than
-				
-hub = PrimeHub()
-				
-hub.light_matrix.show_image('HAPPY')
-				
-hitters = MotorPair('F', 'E')
-Motor('F').run_to_position(0)
-Motor('E').run_to_position(0)
-				
-rotator = Motor('C')
-rotator.run_to_position(CLOUD[shooter_angle])
-				
-wait_for_seconds(0.5)
-hitters.move_tank(720, 'degrees', CLOUD[left_speed], CLOUD[right_speed])
-hitters.stop()</textarea>
-			<input type=text id="cloud_reset" value="none">
+		<input type=text id="cloud_value" value="FIRE!">
+			  <input type=text id="cloud_action_val" value="shootOnce">
+		</div>
+	  
+	  <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
+		<input type=text id="cloud_name" value="restart">
+		<input type=text id="cloud_value" value="true">
+		  <input type=text id="cloud_action_val" value="goToStartPos">
+		</div>
     </div>
 
 	<hr>

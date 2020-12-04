@@ -19,6 +19,8 @@
     resetPage();
     resetTable();
 
+    cloud_update('restart', true);
+
     // restarting code on prime hub
     /*if (mySPIKE && mySPIKE.isActive())
         mySPIKE.executeProgram(1);*/
@@ -33,5 +35,5 @@
  }
 
  function toggleArm(checked, arm) {
-    cloud_update(arm + '_speed', checked ? 100 : 0)
- }
+   cloud_update(arm + '_speed', checked ? 100 : 0)
+}

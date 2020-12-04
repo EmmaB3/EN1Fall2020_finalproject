@@ -9,7 +9,7 @@
 			// custom JavaScript function
 			// - value_val will be the data passed in (e.g. motor speed)
 			function update_motor_speed (name, value) {
-				mySPIKE.Motor('A').start(value); // start motor
+				mySPIKE.Motor('F').start(value); // start motor
 			}
 		</script>
 	</head>
@@ -17,7 +17,7 @@
 
 	<!-- SERVICE DOCK -->
 	<div id="servicedock">
-		<service-airtable id="service_airtable" tablename="demo10"></service-airtable>
+		<service-airtable id="service_airtable" tablename="Page_Input"></service-airtable>
 		<service-spike id="service_spike"></service-spike>
 	</div>
 
