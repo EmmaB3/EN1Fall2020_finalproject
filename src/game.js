@@ -66,6 +66,6 @@ robotInit();
     cloud_update("reset", false);
  }
 
- function angleShooter(degrees) {
+function angleShooter(name, value) {
     //TODO: functionality for it to move with slider
- }
+}

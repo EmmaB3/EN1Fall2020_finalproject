@@ -14,15 +14,81 @@ https://www.w3schools.com/css/default.asp
 }
 
 #controls {
+  color: black;
+  border-radius: 15px;
+  background-color:gray;
+  padding: 10px;
+  width: 400px;
   text-align: center;
 }
 
+#start-button {
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background-color: #454559;
+  padding: 10px;
+  font-size: 15px;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#start-button:hover {
+  background-color: #373747;
+}
+
+#shoot-button {
+  background-color: red;
+  border-radius: 50%;
+  border-width: 5px;
+  padding: 10px;
+  transition-duration: 0.4s;
+  font-size: 15px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#shoot-button:hover {
+  background-color: #ad1313;
+  box-shadow: none;
+}
+
+input[type=range] {
+  -webkit-appearance: none; 
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url('slider-button.png');
+}
+
+input[type=range]::-moz-range-thumb {
+  background: url('slider-button.png');
+}
+
 #instructions {
+  font-size: 16px;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #07071f;
   text-align: center;
+  line-height: 1.25;
 }
 
 #header {
   text-align: center;
+  font-size: 25px;
 }
 
 .footer {

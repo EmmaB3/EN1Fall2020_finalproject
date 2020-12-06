@@ -6,6 +6,13 @@
 	  <script src="../src/cloud.js" charset="utf-8"></script>
 	  <script src="../src/helpers.js" charset="utf-8"></script>
 	  <link rel="stylesheet" href="../src/style.css" />
+	  <style>
+		body {
+		  background-image: url('space2.jpg');
+		  color:white;
+		  font-family: "Lucida Console", "Courier New", monospace;
+		}
+		</style>
 	</head>
 <body>
 
@@ -20,10 +27,10 @@
 
 	<div id="instructions">
 		The year is 2050, and three large asteroids are heading rapidly towards Earth. Luckily, a group of very excited engineers has developed a robot that launches projectiles at the asteroids to throw them off their course, and they want you to control it. Use the controls below to aim and fire the launcher!
-		<p><button onclick='resetGame()'>Start</button></p>
+		<p><button id = "start-button" onclick='resetGame()'>start</button></p>
 	</div>
 
-	<hr>
+	<br>
 
 	<div id="controls">
 		<!-- Slider -->
@@ -32,7 +39,7 @@
 		</p>
 		<p>
 			-30
-			<input type=range id='angleSlider' cloud_action='update' cloud_name='shooter_angle' cloud_min="-30" cloud_max="30" min='-30' max='30' value='0' />
+			<input type=range cloud_action='update' cloud_name='shooter_angle' cloud_min="-30" cloud_max="30" min='-30' max='30' value='0' />
 			30
 		</p>
 
@@ -44,13 +51,12 @@
 
 		<!-- Shoot Button -->
 		<p>
-			<button cloud_action='update' cloud_name='command'>FIRE!</button>
+			<button id="shoot-button" cloud_action='update' cloud_name='command'>FIRE!</button>
 		</p>
 
 	</div>
 
-
-	<hr>
+	<br>
 
 	<div class="footer">
 		<p><a href="./myProject_remote.html" target=_blank>My Project Remote Page</a</p>

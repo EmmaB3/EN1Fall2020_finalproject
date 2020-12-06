@@ -21,3 +21,13 @@ cloud_update(key, val)- updates val in airtables
 
 code notes:
 - position 0 is wherever the motor is at startup
+
+- options: 
+
+TODOS (in order of priority):
+1. figure out position stuff, finish basic shooting and reset
+2. add turning based on slider input
+3. make the ui pretty!!!!
+    - keep in mind that things should be on left side
+4. sensing and keeping score (this would be cool, but not super necessary)
+    - get sensor vals, send to airtables

@@ -20,16 +20,21 @@
 	<div class="cloud_check">
 		<b><em>Monitor Cloud:</em></b>
 
-	  <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
+	    <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
 			<input type=text id="cloud_name" value="command">
-		<input type=text id="cloud_value" value="FIRE!">
-			  <input type=text id="cloud_action_val" value="shootOnce">
+			<input type=text id="cloud_value" value="FIRE!">
+			<input type=text id="cloud_action_val" value="shootOnce">
 		</div>
 	  
-	  <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
-		<input type=text id="cloud_name" value="reset">
-		<input type=text id="cloud_value" value="true">
-		  <input type=text id="cloud_action_val" value="goToStartPos">
+	    <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
+			<input type=text id="cloud_name" value="reset">
+			<input type=text id="cloud_value" value="true">
+		  	<input type=text id="cloud_action_val" value="goToStartPos">
+		</div>
+
+		<div type="cloud_check" cloud_compare="changes" cloud_action="run_js">
+			<input type=text id="cloud_name" value="shooter_angle">
+		  	<input type=text id="cloud_action_val" value="angleShooter">
 		</div>
     </div>
 
