@@ -4,7 +4,7 @@
 		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
 	  <script src="../src/secret.js" charset="utf-8"></script>
 	  <script src="../src/cloud.js" charset="utf-8"></script>
-	  <script src="../src/helpers.js" charset="utf-8"></script>
+	  <script src="../src/remote_helpers.js" charset="utf-8"></script>
 	  <link rel="stylesheet" href="../src/style.css" />
 	  <style>
 		body {
@@ -33,20 +33,26 @@
 	<br>
 
 	<div id="controls">
+		<!-- Display -->
+		<div id="display-screen">
+			<p id="display-angle">Angle: 0</p>
+			<p id="display-arms">Using Both Arms</p>
+		</div>
+
 		<!-- Slider -->
 		<p>
 			Shooter Angle:
 		</p>
 		<p>
 			-30
-			<input type=range cloud_action='update' cloud_name='shooter_angle' cloud_min="-30" cloud_max="30" min='-30' max='30' value='0' />
+			<input id="angle-slider" type=range min='-30' max='30' value='0' onchange="updateAngle(this.value)"/>
 			30
 		</p>
 
 		<!-- Arm Toggles -->
 		<p>
-			<input type="checkbox" class="armToggle" onchange="toggleArm(this.checked, 'left')" checked> Using Left Arm
-			<input type="checkbox" class="armToggle" onchange="toggleArm(this.checked, 'right')" checked> Using Right Arm
+			<input type="checkbox"  id="left-arm-toggle" class="arm-toggle" onchange="toggleArm(this.checked, 'left')" checked> Using Left Arm
+			<input type="checkbox" id="right-arm-toggle" class="arm-toggle" onchange="toggleArm(this.checked, 'right')" checked> Using Right Arm
 		</p>
 
 		<!-- Shoot Button -->

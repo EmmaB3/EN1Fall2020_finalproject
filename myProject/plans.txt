@@ -31,3 +31,14 @@ TODOS (in order of priority):
     - keep in mind that things should be on left side
 4. sensing and keeping score (this would be cool, but not super necessary)
     - get sensor vals, send to airtables
+
+
+
+option 1: get everything working in js
+    - problem: have to get angle-based positioning to work out
+    - ALSO can I get sensor working? unclear
+
+option 2: return to python
+    - pressing fire loads code to fire once to spike prime
+    - change in slider loads code to go to that angle
+    - 

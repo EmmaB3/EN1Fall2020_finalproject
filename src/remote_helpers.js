@@ -17,7 +17,8 @@ function resetGame() {
 
 // turns arms on and off (called whenever checkboxes are used)
 function toggleArm(checked, arm) {
-   cloud_update(arm + '_speed', checked ? 100 : 0)
+   cloud_update(arm + '_speed', checked ? 100 : 0);
+   updateArmsDisplay();
 }
 
 // resets airtable values to defaults for start of game
@@ -32,9 +33,31 @@ function resetTable() {
 
 // resets checkboxes and slider to default positions
 function resetPage() {
-   armToggles = document.getElementsByClassName('armToggle');
+   let armToggles = document.getElementsByClassName('arm-toggle');
    for(a of armToggles)
       a.checked = true;
 
-   document.getElementById('angleSlider').value = 0;
+   document.getElementById('angle-slider').value = 0;
+}
+
+// updates angle in airtables and text on page displaying angle
+function updateAngle(val) {
+   cloud_update('shooter_angle', val);
+   document.getElementById("display-angle").innerText = "Angle: " + val;
+}
+
+// updates text on page saying which arms are in use
+function updateArmsDisplay() {
+   let label = document.getElementById("display-arms");
+   let left = document.getElementById("left-arm-toggle");
+   let right = document.getElementById("right-arm-toggle");
+
+   if(left.checked && right.checked)
+      label.innerText = "Using Both Arms";
+   else if(left.checked)
+      label.innerText = "Using Left Arm";
+   else if(right.checked)
+      label.innerText = "Using Right Arm";
+   else
+      label.innerText = "No Arms In Use";
 }

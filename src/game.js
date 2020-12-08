@@ -7,16 +7,25 @@
  */
 
  //TODO: write function for resetting position zero (offset var in robot obj, set it to current position whenever a certain button is pressed)
+ // https://tuftsceeo.github.io/SPIKE-Web-Interface/
 
 var robot;
 var setupSuccessful = false;
 
 // setting up motors/sensors
-robotInit();
+window.addEventListener('load', robotInit());
 
 // shoots one ball
  function shootOnce() {
     console.log("pressed shoot");
+
+    //robot.leftArm.start(10);
+
+
+    //robot.leftArm.run_for_degrees(720);
+    //runToZero(robot.leftArm);
+    /*robot.leftArm.run_for_degrees(90);
+    console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());*/
 
     console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
 
@@ -31,6 +40,25 @@ robotInit();
 
     cloud_update('command', 'none');
  }
+
+ function runTankForDegrees(motor1, motor2, degrees) {
+    let initialPos = motor1.get_degrees_counted();
+    let counter = 0;
+    motor1.start(100);
+ }
+
+function runToZero(motor) {
+    let counter = 0;
+    let direction = (motor.get_degrees_counted() < 0) ? -1 : 1;
+    while(motor.get_degrees_counted() != 0 && counter < 1000) {
+        // PID control except it's just P
+        let speed = Math.round(100 * Math.abs(motor.get_degrees_counted()) / 180);
+        motor.start(25 * direction);
+        console.log(motor.get_degrees_counted());
+        counter++;
+    }
+    motor.stop();
+}
 
  /* initializes robot object with necessary motors and sensors
   * if spike is not connected, will repeat attempt every 2 seconds until 
