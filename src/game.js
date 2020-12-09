@@ -95,5 +95,6 @@ function runToZero(motor) {
  }
 
 function angleShooter(name, value) {
+    robot.rotator.run_to_position(value);
     //TODO: functionality for it to move with slider
 }

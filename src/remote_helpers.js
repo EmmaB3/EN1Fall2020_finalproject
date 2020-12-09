@@ -61,3 +61,9 @@ function updateArmsDisplay() {
    else
       label.innerText = "No Arms In Use";
 }
+
+function highContrast() {
+   let instructions = document.getElementById("instructions");
+
+   instructions.setAttribute("background-color") =  "#fff5d9";
+}
