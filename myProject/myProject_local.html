@@ -20,21 +20,23 @@
 	<div class="cloud_check">
 		<b><em>Monitor Cloud:</em></b>
 
-	    <!--<div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
+	    <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
 			<input type=text id="cloud_name" value="command">
 			<input type=text id="cloud_value" value="FIRE!">
 			<input type=text id="cloud_action_val" value="shootOnce">
-		</div> -->
-		<div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
+		</div>
+		<!-- <div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
 			<input type=text id="cloud_name" value="command">
 			<input type=text id="cloud_value" value="FIRE!">
       <input type=text id="cloud_action_val" value="0">
-			<textarea id="cloud_code">from spike import PrimeHub, MotorPair, LightMatrix
-
+			<textarea id="cloud_code">from spike import PrimeHub, LightMatrix, MotorPair
 hub = PrimeHub()
-hub.light_matrix.write(10)</textarea>
+hub.light_matrix.show_image('HAPPY')
+MotorPair('F', 'E').move_tank(720, 'degrees', CLOUD[left_speed], CLOUD[right_speed])
+hub.light_matrix.off();
+P</textarea>
 			<input type=text id="cloud_reset" value="none">
-		</div>
+		</div>-->
 	  
 	    <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
 			<input type=text id="cloud_name" value="reset">

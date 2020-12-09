@@ -5,6 +5,8 @@
  * Purpose: controlling remote side of game
  */
 
+var attempts = 0;
+
 /* resets airtable values and input elements on page, tells robot to reset 
  *  motor positions 
  */
@@ -37,6 +39,7 @@ function resetPage() {
    for(a of armToggles)
       a.checked = true;
 
+   updateAttempts(0);
    document.getElementById('angle-slider').value = 0;
 }
 
@@ -66,4 +69,16 @@ function highContrast() {
    let instructions = document.getElementById("instructions");
 
    instructions.setAttribute("background-color") =  "#fff5d9";
+}
+
+// tell the robot to shoot and update attempts accordingly
+function fire(){
+   cloud_update('command', 'FIRE!');
+   updateAttempts(attempts + 1);
+}
+
+// updates attempts, both in memory and on page
+function updateAttempts(newVal) {
+   attempts = newVal;
+   document.getElementById("display-attempts").innerText = "Attempts: " + attempts;
 }

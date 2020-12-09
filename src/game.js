@@ -17,28 +17,23 @@ window.addEventListener('load', robotInit());
 
 // shoots one ball
  function shootOnce() {
-    console.log("pressed shoot");
+    console.log("shooting");
 
-    //robot.leftArm.start(10);
+    if(cloud_get("left_speed") == 100)
+        robot.leftArm.run_for_degrees(720, -100);
+    if(cloud_get("right_speed") == 100)
+        robot.rightArm.run_for_degrees(720, 100);
 
+    cloud_update('command', 'none');
 
-    //robot.leftArm.run_for_degrees(720);
-    //runToZero(robot.leftArm);
-    /*robot.leftArm.run_for_degrees(90);
-    console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());*/
-
-    console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
+    /*console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
 
     robot.arms.start_tank(cloud_get("left_speed"), cloud_get("right_speed"));
-    //TODO: make it angle instead of time based
-        // weird bug: .get_position() gives really large numbers (in the thousands) and .get_degrees_counted() gets smaller ones that seem to cycle over? seems like it should be the other way around
 
     setTimeout(function() {
         robot.arms.stop();
         console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
-    }, (2000));
-
-    cloud_update('command', 'none');
+    }, (2000));*/
  }
 
  function runTankForDegrees(motor1, motor2, degrees) {
@@ -94,7 +89,9 @@ function runToZero(motor) {
     cloud_update("reset", false);
  }
 
+ /* Angles shooter to current chosen angle
+  * NOTE: defines 0 degrees as position in which spike prime was turned on
+  */
 function angleShooter(name, value) {
     robot.rotator.run_to_position(value);
-    //TODO: functionality for it to move with slider
 }
