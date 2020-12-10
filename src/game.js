@@ -6,11 +6,9 @@
  * (TODO: write an actual header)
  */
 
- //TODO: write function for resetting position zero (offset var in robot obj, set it to current position whenever a certain button is pressed)
  // https://tuftsceeo.github.io/SPIKE-Web-Interface/
 
 var robot;
-var setupSuccessful = false;
 
 // setting up motors/sensors
 window.addEventListener('load', robotInit());
@@ -20,26 +18,11 @@ window.addEventListener('load', robotInit());
     console.log("shooting");
 
     if(cloud_get("left_speed") == 100)
-        robot.leftArm.run_for_degrees(720, -100);
+        robot.leftArm.run_for_degrees(715, -100);
     if(cloud_get("right_speed") == 100)
         robot.rightArm.run_for_degrees(720, 100);
 
     cloud_update('command', 'none');
-
-    /*console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
-
-    robot.arms.start_tank(cloud_get("left_speed"), cloud_get("right_speed"));
-
-    setTimeout(function() {
-        robot.arms.stop();
-        console.log("pos: " + robot.leftArm.get_position() + "deg: " + robot.leftArm.get_degrees_counted());
-    }, (2000));*/
- }
-
- function runTankForDegrees(motor1, motor2, degrees) {
-    let initialPos = motor1.get_degrees_counted();
-    let counter = 0;
-    motor1.start(100);
  }
 
 function runToZero(motor) {
@@ -55,6 +38,14 @@ function runToZero(motor) {
     motor.stop();
 }
 
+function updateHits() {
+    var currHit = cloud_get("hits");
+    if(currHit === "")
+        cloud_update("hits", 1);
+    else
+        cloud_update("hits", parseInt(currHit) + 1);
+}
+
  /* initializes robot object with necessary motors and sensors
   * if spike is not connected, will repeat attempt every 2 seconds until 
   * successful inititalization
@@ -68,7 +59,6 @@ function runToZero(motor) {
             arms: mySPIKE.MotorPair('F', 'E')
 
         };
-        setupSuccessful = true;
         console.log("initialized robot!");
     } else {
         console.log("could not initialize robot. trying again in 2 s");
@@ -93,5 +83,5 @@ function runToZero(motor) {
   * NOTE: defines 0 degrees as position in which spike prime was turned on
   */
 function angleShooter(name, value) {
-    robot.rotator.run_to_position(value);
+    robot.rotator.run_to_position(value, 50);
 }

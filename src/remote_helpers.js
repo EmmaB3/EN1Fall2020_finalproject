@@ -2,10 +2,14 @@
  *
  * Author: Emma Bethel, 12/3/20
  * 
- * Purpose: controlling remote side of game
+ * Controls remote side of game
  */
 
 var attempts = 0;
+
+var displayScreen;
+
+window.addEventListener('DOMContentLoaded', pageSetup);
 
 /* resets airtable values and input elements on page, tells robot to reset 
  *  motor positions 
@@ -25,6 +29,7 @@ function toggleArm(checked, arm) {
 
 // resets airtable values to defaults for start of game
 function resetTable() {
+   cloud_update('hits', 0);
    cloud_update('shooter_angle', 0);
    cloud_update('shots', 0);
    cloud_update('left_speed', 100);
@@ -40,7 +45,10 @@ function resetPage() {
       a.checked = true;
 
    updateAttempts(0);
+   resetDisplay();
    document.getElementById('angle-slider').value = 0;
+   
+   checkForHit(0);
 }
 
 // updates angle in airtables and text on page displaying angle
@@ -72,7 +80,7 @@ function highContrast() {
 }
 
 // tell the robot to shoot and update attempts accordingly
-function fire(){
+function fire() {
    cloud_update('command', 'FIRE!');
    updateAttempts(attempts + 1);
 }
@@ -81,4 +89,58 @@ function fire(){
 function updateAttempts(newVal) {
    attempts = newVal;
    document.getElementById("display-attempts").innerText = "Attempts: " + attempts;
+}
+
+function checkForHit(currHits) {
+   let gameActive = true;
+   let storedHits = currHits;
+   console.log("checking for hits");
+
+   let hitsFromCloud = parseInt(cloud_get("hits"));
+   if(hitsFromCloud && storedHits < hitsFromCloud) {
+      storedHits++;
+      gameActive = storedHits < 3;
+      reactToHit(gameActive);
+   }
+
+   if(gameActive)
+      setTimeout(function() { checkForHit(storedHits); }, 4000);
+
+}
+
+function reactToHit(gameActive) {
+   if(gameActive) {
+      displayScreen.feedback.innerText = "Nice Hit!";
+      setTimeout(function () { displayScreen.feedback.innerHTML = "&nbsp;"; }, 5000);
+   } else {
+      clearDisplay();
+      displayScreen.angle.innerText = "Final Score: " + (33 - attempts);
+      displayScreen.feedback.innerText = "Press start to play again!";
+   }
+}
+
+function clearDisplay() {
+   displayScreen.angle.innerHTML = "&nbsp;";
+   displayScreen.arms.innerHTML = "&nbsp;";
+   displayScreen.feedback.innerHTML = "&nbsp;";
+   displayScreen.attempts.innerHTML = "&nbsp;";
+}
+
+function resetDisplay() {
+   displayScreen.angle.innerText = "Angle: 0";
+   displayScreen.arms.innerText = "Using Both Arms";
+   displayScreen.feedback.innerHTML = "&nbsp;";
+   displayScreen.attempts.innerText = "Attempts: 0";
+}
+
+function pageSetup() {
+   // initializing displayScreen (for ease of future HTML manipulation)
+   displayScreen = {
+      angle: document.getElementById("display-angle"),
+      arms: document.getElementById("display-arms"),
+      feedback: document.getElementById("display-feedback"),
+      attempts: document.getElementById("display-attempts")
+   };
+
+   checkForHit(0);
 }

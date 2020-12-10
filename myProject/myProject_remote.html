@@ -37,7 +37,7 @@
 		<div id="display-screen">
 			<p id="display-angle">Angle: 0</p>
 			<p id="display-arms">Using Both Arms</p>
-			<br>
+			<p id="display-feedback">&nbsp;</p>
 			<p id="display-attempts">Attempts: 0</p>
 		</div>
 
@@ -53,8 +53,13 @@
 
 		<!-- Arm Toggles -->
 		<p>
-			<input type="checkbox"  id="left-arm-toggle" class="arm-toggle" onchange="toggleArm(this.checked, 'left')" checked> Using Left Arm
-			<input type="checkbox" id="right-arm-toggle" class="arm-toggle" onchange="toggleArm(this.checked, 'right')" checked> Using Right Arm
+			<input type="checkbox"  id="left-arm-toggle" class="arm-toggle" onchange="toggleArm(this.checked, 'left')" checked>
+			<label for="left-arm-toggle" class="toggle-label"></label>
+			Left Arm
+
+			<input type="checkbox" id="right-arm-toggle" class="arm-toggle" onchange="toggleArm(this.checked, 'right')" checked>
+			<label for="right-arm-toggle" class="toggle-label"></label>
+			Right Arm
 		</p>
 
 		<!-- Shoot Button -->
