@@ -8,6 +8,7 @@
 var attempts = 0;
 
 var displayScreen;
+var darkColors, lightColors;
 
 window.addEventListener('DOMContentLoaded', pageSetup);
 
@@ -73,10 +74,39 @@ function updateArmsDisplay() {
       label.innerText = "No Arms In Use";
 }
 
-function highContrast() {
-   let instructions = document.getElementById("instructions");
+function colorSwitchTo(mode) {
+   console.log("received: " + mode);
 
-   instructions.setAttribute("background-color") =  "#fff5d9";
+   let colors, nextMode;
+   if(mode == "light") {
+      colors = lightColors;
+      nextMode = "dark";
+   } else {
+      colors = darkColors;
+      nextMode = "light";
+   }
+
+   document.getElementById("color-switch").setAttribute("value", nextMode);
+
+   document.getElementById("instructions").style.backgroundColor =  colors.instructions;
+
+   let displayScreen = document.getElementById("display-screen");
+   displayScreen.style.backgroundColor = colors.displayBackground;
+   displayScreen.style.color = colors.displayText;
+
+   let controlsDiv = document.getElementById("controls");
+   controlsDiv.style.backgroundColor =  colors.controlsBackground;
+   controlsDiv.style.color = colors.controlsText;
+
+   let buttons = document.getElementsByClassName("remote-page-button");
+   for(b of buttons) {
+      b.style.backgroundColor = colors.buttons;
+      b.classList.remove('button-' + nextMode);
+      b.classList.add('button-' + mode);
+   }
+   document.getElementById("color-switch").innerText = nextMode + " mode";
+   
+   document.body.style.backgroundImage = colors.background;
 }
 
 // tell the robot to shoot and update attempts accordingly
@@ -143,4 +173,27 @@ function pageSetup() {
    };
 
    checkForHit(0);
+   initColors();
+}
+
+function initColors() {
+   darkColors = {
+      instructions: "#07071f",
+      buttons: "#454559",
+      controlsBackground: "#808080",
+      controlsText: "#000000",
+      background: "url('space2.jpg')",
+      displayBackground: "#000000",
+      displayText: "#5f9e00"
+   };
+
+   lightColors = {
+      instructions: "#309eb9", 
+      buttons: "#258399",
+      controlsBackground: "#cc8d96",
+      controlsText: "#ffffff",
+      background: "url('space1.jpg')",
+      displayBackground: "#f7d7ea",
+      displayText: "#37383f"
+   };
 }

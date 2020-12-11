@@ -16,13 +16,13 @@ https://www.w3schools.com/css/default.asp
 #controls {
   color: black;
   border-radius: 15px;
-  background-color:gray;
+  background-color:#808080;
   padding: 10px;
   width: 400px;
   text-align: center;
 }
 
-#start-button {
+.remote-page-button {
   border-radius: 10px;
   border: none;
   color: white;
@@ -32,9 +32,27 @@ https://www.w3schools.com/css/default.asp
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
-#start-button:hover {
-  background-color: #373747;
+.button-light:hover {
+  background-color: #1f6f82 !important;
 }
+
+.button-dark:hover {
+  background-color: #373747 !important;
+}
+
+#color-switch {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+/*#start-button {
+
+}*/
+
+/*.remote-page-button:hover {
+  background-color: #373747;
+}*/
 
 #shoot-button {
   background-color: rgb(218, 2, 2);
@@ -54,7 +72,7 @@ https://www.w3schools.com/css/default.asp
 
 #display-screen {
   background: black;
-  color: rgb(95, 158, 0);
+  color: #5f9e00;
   height: 125px;
   width: 200px;
   padding: 5px;

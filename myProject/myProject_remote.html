@@ -11,6 +11,7 @@
 		  background-image: url('space2.jpg');
 		  color:white;
 		  font-family: "Lucida Console", "Courier New", monospace;
+		  background-size: 100% 100%;
 		}
 		</style>
 	</head>
@@ -23,11 +24,12 @@
 
 	<div id="header">
 		<h1>Asteroid Blast(eroid)</h1>
+		<button id="color-switch" class="remote-page-button button-dark" value="light" onclick="colorSwitchTo(this.value)">light mode</button>
 	</div>
 
 	<div id="instructions">
 		The year is 2050, and three large asteroids are heading rapidly towards Earth. Luckily, a group of very excited engineers has developed a robot that launches projectiles at the asteroids to throw them off their course, and they want you to control it. Use the controls below to aim and fire the launcher!
-		<p><button id = "start-button" onclick='resetGame()'>start</button></p>
+		<p><button id = "start-button" class="remote-page-button button-dark" onclick='resetGame()'>start</button></p>
 	</div>
 
 	<br>
