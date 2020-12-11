@@ -16,8 +16,8 @@ window.addEventListener('DOMContentLoaded', pageSetup);
  *  motor positions 
  */
 function resetGame() {
-   resetPage();
    resetTable();
+   resetPage();
 
    cloud_update('reset', true);
 }
@@ -49,7 +49,8 @@ function resetPage() {
    resetDisplay();
    document.getElementById('angle-slider').value = 0;
    
-   checkForHit(0);
+   // delaying first check to give time for airtables value reset
+   setTimeout(function () { checkForHit(0); }, 5000);
 }
 
 // updates angle in airtables and text on page displaying angle

@@ -21,7 +21,7 @@ window.addEventListener('load', robotInit());
     if(cloud_get("right_speed") == 100)
         robot.rightArm.run_for_degrees(720, 100);
     if(cloud_get("left_speed") == 100)
-        robot.leftArm.run_for_degrees(715, -100);
+        robot.leftArm.run_for_degrees(720, -100);
 
     cloud_update('command', 'none');
  }
