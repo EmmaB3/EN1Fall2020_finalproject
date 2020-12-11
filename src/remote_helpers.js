@@ -74,9 +74,10 @@ function updateArmsDisplay() {
       label.innerText = "No Arms In Use";
 }
 
+/* edits colors of HTML objects to switch between light/dark modes
+ * PARAMETERS: mode- "light" or "dark" (representing mode to be switched to)
+ */
 function colorSwitchTo(mode) {
-   console.log("received: " + mode);
-
    let colors, nextMode;
    if(mode == "light") {
       colors = lightColors;
@@ -85,7 +86,6 @@ function colorSwitchTo(mode) {
       colors = darkColors;
       nextMode = "light";
    }
-
    document.getElementById("color-switch").setAttribute("value", nextMode);
 
    document.getElementById("instructions").style.backgroundColor =  colors.instructions;
@@ -115,12 +115,16 @@ function fire() {
    updateAttempts(attempts + 1);
 }
 
-// updates attempts, both in memory and on page
+/* updates attempts, both in memory and on page 
+ * PARAMETERS: newVal- vupdated value to be stored
+ */
 function updateAttempts(newVal) {
    attempts = newVal;
    document.getElementById("display-attempts").innerText = "Attempts: " + attempts;
 }
 
+// tracks when targets are hit & keeps score accordingly
+// PARAMETERS: currHits- total # of known hits so far
 function checkForHit(currHits) {
    let gameActive = true;
    let storedHits = currHits;
@@ -133,11 +137,16 @@ function checkForHit(currHits) {
       reactToHit(gameActive);
    }
 
+   // if at least one target is still up, check again in 4 seconds
    if(gameActive)
       setTimeout(function() { checkForHit(storedHits); }, 4000);
 
 }
 
+/* give appropriate feedback to user on most recent hit
+ * PARAMETERS: gameActive- true if all targets are down, false otherwise (if 
+ *   all targets are down, final score will be shown)
+ */
 function reactToHit(gameActive) {
    if(gameActive) {
       displayScreen.feedback.innerText = "Nice Hit!";
@@ -149,6 +158,7 @@ function reactToHit(gameActive) {
    }
 }
 
+// empties display screen of all text
 function clearDisplay() {
    displayScreen.angle.innerHTML = "&nbsp;";
    displayScreen.arms.innerHTML = "&nbsp;";
@@ -156,6 +166,7 @@ function clearDisplay() {
    displayScreen.attempts.innerHTML = "&nbsp;";
 }
 
+// populates display screen with text for beginning of game
 function resetDisplay() {
    displayScreen.angle.innerText = "Angle: 0";
    displayScreen.arms.innerText = "Using Both Arms";
@@ -163,6 +174,7 @@ function resetDisplay() {
    displayScreen.attempts.innerText = "Attempts: 0";
 }
 
+// initializes global vars & starts cloud checking
 function pageSetup() {
    // initializing displayScreen (for ease of future HTML manipulation)
    displayScreen = {
@@ -176,6 +188,7 @@ function pageSetup() {
    initColors();
 }
 
+// initializes color codes for light/dark modes
 function initColors() {
    darkColors = {
       instructions: "#07071f",

@@ -2,11 +2,12 @@
  *
  * Author: Emma Bethel, 12/4/20
  *
- * ugly, but it works... kind of
- * (TODO: write an actual header)
+ * facilitates cloud-robot interaction
+ * 
+ * makes significant use of https://tuftsceeo.github.io/SPIKE-Web-Interface/
+ * 
  */
 
- // https://tuftsceeo.github.io/SPIKE-Web-Interface/
 
 var robot;
 
@@ -25,19 +26,9 @@ window.addEventListener('load', robotInit());
     cloud_update('command', 'none');
  }
 
-function runToZero(motor) {
-    let counter = 0;
-    let direction = (motor.get_degrees_counted() < 0) ? -1 : 1;
-    while(motor.get_degrees_counted() != 0 && counter < 1000) {
-        // PID control except it's just P
-        let speed = Math.round(100 * Math.abs(motor.get_degrees_counted()) / 180);
-        motor.start(25 * direction);
-        console.log(motor.get_degrees_counted());
-        counter++;
-    }
-    motor.stop();
-}
-
+ /* updates hits value in cloud (for display on remote page)
+  *  (called manually via button interaction by local controller, aka me)
+  */
 function updateHits() {
     var currHit = cloud_get("hits");
     if(currHit === "")
